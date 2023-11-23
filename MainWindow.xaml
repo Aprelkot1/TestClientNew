@@ -9,18 +9,18 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Width="200">Название:</TextBlock>
         <TextBox x:Name="AddTestBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0" Width="400"></TextBox>
-        <Button Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="420,25,0,0" Command="{Binding addTest}"  CommandParameter="{Binding ElementName=AddTestBox,Path=Text}">Добавить
+        <Button Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="420,25,0,0" Command="{Binding AddTest}"  CommandParameter="{Binding ElementName=AddTestBox,Path=Text}">Добавить
         </Button>
-        <ListBox x:Name="TestListBox" Margin="0,50,0,0" ItemsSource="{Binding Tests}"  SelectedItem="{Binding selectedTest}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <ListBox x:Name="TestListBox" Margin="0,50,0,0" ItemsSource="{Binding Tests}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel  Margin="0,0,0,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Width="200">Название:</TextBlock>
-                        <TextBox x:Name="TestNameBox" Text="{Binding Path=testName, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Width="400"></TextBox>
+                        <TextBox x:Name="TestNameBox" Text="{Binding Path=TestName, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Width="400"></TextBox>
                         <Button x:Name="StartTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="420,-30,0,0" Width="60" Height="40">Пройти</Button>
-                        <Button x:Name="SaveTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="490,-40,0,0" Width="80" Height="40" Command="{Binding DataContext.editTest, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding id}">Сохранить</Button>
-                        <Button x:Name="EditTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="580,-40,0,0" Width="100" Height="40" Command="{Binding DataContext.editQuestionOpen, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding id}">Редактировать</Button>
-                        <Button x:Name="RemoveTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="690,-40,0,0" Width="80" Height="40"  Command="{Binding DataContext.deleteTest, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding id}">Удалить</Button>
+                        <Button x:Name="SaveTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="490,-40,0,0" Width="80" Height="40" Command="{Binding DataContext.EditTest, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">Сохранить</Button>
+                        <Button x:Name="EditTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="580,-40,0,0" Width="100" Height="40" Command="{Binding DataContext.EditQuestionOpen, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">Редактировать</Button>
+                        <Button x:Name="RemoveTestButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="690,-40,0,0" Width="80" Height="40"  Command="{Binding DataContext.DeleteTest, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">Удалить</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -80,6 +80,7 @@
       <DependentUpon>TakeTestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CommandsProvider.cs" />
+    <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Page Include="EditTestWindow.xaml">
       <SubType>Designer</SubType>

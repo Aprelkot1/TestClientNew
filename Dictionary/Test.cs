@@ -10,25 +10,25 @@ namespace TestClient.Dictionary
 {
     internal class Test : INotifyPropertyChanged
     {
-        private string Id { get; set; }
-        private string TestName { get; set; }
+        private string id { get; set; }
+        private string testName { get; set; }
        
-        public string id
+        public string Id
         {
-            get { return Id; }
+            get { return id; }
             set
             {
-                Id = value;
-                OnPropertyChanged("id");
+                id = value;
+                OnPropertyChanged("Id");
             }
         }
-        public string testName
+        public string TestName
         {
-            get { return TestName; }
+            get { return testName; }
             set
             {
-                TestName = value;
-                OnPropertyChanged("testName");
+                testName = value;
+                OnPropertyChanged("TestName");
             }
         }
 

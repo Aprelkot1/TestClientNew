@@ -21,16 +21,15 @@ namespace TestClient.ViewModels
         RequestAdd ra = new RequestAdd();
         RequestEdit re = new RequestEdit(); 
         RequestRemove rr = new RequestRemove();
-        private Test SelectedTest;
         public ObservableCollection<Test> Tests { get; set; }
 
-        private CommandsProvider EditQuestionOpen;
-        public CommandsProvider editQuestionOpen
+        private CommandsProvider editQuestionOpen;
+        public CommandsProvider EditQuestionOpen
         {
             get
             {
-                return EditQuestionOpen ??
-                  (EditQuestionOpen = new CommandsProvider(obj =>
+                return editQuestionOpen ??
+                  (editQuestionOpen = new CommandsProvider(obj =>
                   {
                      
                       foreach (Window window in System.Windows.Application.Current.Windows)
@@ -42,12 +41,10 @@ namespace TestClient.ViewModels
                       }
                       foreach (var t in GetListsProvider.testList)
                       {
-                          if (t.id == obj as string)
+                          if (t.Id == obj as string)
                           {
-                              EditTestWindow editQuestionWindow = new EditTestWindow(t.id);
-                              GetListsProvider gl = new GetListsProvider();
-                              gl.GetQuestions(t.id);
-                              editQuestionWindow.Title = "Редактировать тест " + t.testName;
+                              EditTestWindow editQuestionWindow = new EditTestWindow(t.Id);
+                              editQuestionWindow.Title = "Редактировать тест " + t.TestName;
                               editQuestionWindow.Show();
                               editQuestionWindow.Owner = Application.Current.MainWindow;
                           }
@@ -57,17 +54,17 @@ namespace TestClient.ViewModels
                 ));
             }
         }
-        private CommandsProvider DeleteTest;
-        public CommandsProvider deleteTest
+        private CommandsProvider deleteTest;
+        public CommandsProvider DeleteTest
         {
             get
             {
-                return DeleteTest ??
-                  (DeleteTest = new CommandsProvider(obj =>
+                return deleteTest ??
+                  (deleteTest = new CommandsProvider(obj =>
                   {
                       foreach (var t in GetListsProvider.testList)
                       {
-                          if (t.id == obj as string)
+                          if (t.Id == obj as string)
                           {
                               rr.Test(t);
                           }
@@ -77,17 +74,17 @@ namespace TestClient.ViewModels
                 ));
             }
         }
-        private CommandsProvider EditTest;
-        public CommandsProvider editTest
+        private CommandsProvider editTest;
+        public CommandsProvider EditTest
         {
             get
             {
-                return EditTest ??
-                  (EditTest = new CommandsProvider(obj =>
+                return editTest ??
+                  (editTest = new CommandsProvider(obj =>
                   {
                       foreach(var t in GetListsProvider.testList)
                       {
-                          if(t.id == obj as string)
+                          if(t.Id == obj as string)
                           {
                               re.Test(t);
                           }
@@ -97,26 +94,17 @@ namespace TestClient.ViewModels
                 ));
             }
         }
-        private CommandsProvider AddTest;
-        public CommandsProvider addTest
+        private CommandsProvider addTest;
+        public CommandsProvider AddTest
         {
             get
             {
-                return AddTest ??
-                  (AddTest = new CommandsProvider(obj =>
+                return addTest ??
+                  (addTest = new CommandsProvider(obj =>
                   {
                       ra.Test(obj as string);
                   },
                  (obj) => !String.IsNullOrEmpty(obj as string)));
-            }
-        }
-        public Test selectedTest
-        {
-            get { return SelectedTest; }
-            set
-            {
-                SelectedTest = value;
-                OnPropertyChanged("selectedTest");
             }
         }
         public TestViewModel()

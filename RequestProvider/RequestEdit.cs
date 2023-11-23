@@ -19,38 +19,32 @@ namespace TestClient.RequestProvider
             {
                 type = "[EDIT]",
                 dict = "Tests",
-                text = test.testName,
-                options = test.id
+                text = test.TestName,
+                options = test.Id
             };
             var request = await ServerDataStream.ServerDataStreamJson(rs);
         }
-        public async void Questions(object sender)
+        public async void Questions(object o)
         {
-            FindChildrenProvider fcp = new FindChildrenProvider();
-            var Id = fcp.FindTextBoxChildrenText("QuestionIdBox", sender as System.Windows.Controls.Button);
-            var Name = fcp.FindTextBoxChildrenText("QuestionNameBox", sender as System.Windows.Controls.Button);
+            Questions q = o as Questions;
             RequestService rs = new RequestService
             {
                 type = "[EDIT]",
                 dict = "Questions",
-                text = Name,
-                options = Id
+                text = q.Question,
+                options = q.Id
             };
             var request = await ServerDataStream.ServerDataStreamJson(rs);
         }
-        public async void Answers(object sender)
+        public async void Answers(object o)
         {
-            FindChildrenProvider fcp = new FindChildrenProvider();
-            var Id = fcp.FindTextBoxChildrenText("AnswerIdBox", sender as System.Windows.Controls.Button);
-            var Name = fcp.FindTextBoxChildrenText("AnswerNameBox", sender as System.Windows.Controls.Button);
-            var TrueCheck = fcp.FindCheckBoxChildren("TrueAnswerCheckBox", sender as System.Windows.Controls.Button);
-            MessageBox.Show(TrueCheck);
+            Answers a = o as Answers;
             RequestService rs = new RequestService
             {
                 type = "[EDIT]",
                 dict = "Answers",
-                text = Name,
-                options = Id + " " + TrueCheck
+                text = a.Answer,
+                options = a.Id + " " + a.True
             };
             var request = await ServerDataStream.ServerDataStreamJson(rs);
         }

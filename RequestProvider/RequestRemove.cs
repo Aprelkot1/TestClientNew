@@ -23,53 +23,51 @@ namespace TestClient.RequestProvider
                 type = "[DEL]",
                 dict = "Tests",
                 text = "",
-                options = test.id
+                options = test.Id
             };
             var request = await ServerDataStream.ServerDataStreamJson(rs);
             for(int i = 0; i <GetListsProvider.testList.Count; i++) 
             {
-                if (GetListsProvider.testList[i].id == test.id)
+                if (GetListsProvider.testList[i].Id == test.Id)
                 {
                     GetListsProvider.testList.Remove(GetListsProvider.testList[i]);
                 }
             }
         }
-        public async void Questions(object sender)
+        public async void Questions(object o)
         {
-            FindChildrenProvider fcp = new FindChildrenProvider();
-            var Id = fcp.FindTextBoxChildrenText("QuestionIdBox", sender as System.Windows.Controls.Button);
+            Questions q = o as Questions;
             RequestService rs = new RequestService
             {
                 type = "[DEL]",
                 dict = "Questions",
                 text = "",
-                options = Id
+                options = q.Id
             };
             var request = await ServerDataStream.ServerDataStreamJson(rs);
             for (int i = 0; i < GetListsProvider.questiontList.Count; i++)
             {
-                    if (GetListsProvider.questiontList[i].Id == Id)
+                    if (GetListsProvider.questiontList[i].Id == q.Id)
                     {
                         GetListsProvider.questiontList.Remove(GetListsProvider.questiontList[i]);
 
                     }
             }
         }
-        public async void Answers(object sender)
+        public async void Answers(object o)
         {
-            FindChildrenProvider fcp = new FindChildrenProvider();
-            var Id = fcp.FindTextBoxChildrenText("AnswerIdBox", sender as System.Windows.Controls.Button);
+            Answers a = o as Answers;
             RequestService rs = new RequestService
             {
                 type = "[DEL]",
                 dict = "Answers",
                 text = "",
-                options = Id
+                options = a.Id
             };
             var request = await ServerDataStream.ServerDataStreamJson(rs);
             for (int i = 0; i < GetListsProvider.answerList.Count; i++)
             {
-                if (GetListsProvider.answerList[i].Id == Id)
+                if (GetListsProvider.answerList[i].Id == a.Id)
                 {
                     GetListsProvider.answerList.Remove(GetListsProvider.answerList[i]);
 

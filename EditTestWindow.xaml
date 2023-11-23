@@ -16,17 +16,16 @@
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Margin="10,5,0,0" Width="200">Название:</TextBlock>
         <TextBox x:Name="AddQuestionBox" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0" Width="300"></TextBox>
-        <Button Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,25,0,0" Click="AddQuestion_Click">Добавить
+        <Button Width="100" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,25,0,0" Command="{Binding AddQuestion}"  CommandParameter="{Binding ElementName=AddQuestionBox,Path=Text}">Добавить
         </Button>
-        <ListBox x:Name="QuestionListBox" Grid.Column="0"  Grid.Row="0" Margin="0,50,0,0"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedItem="0" SelectionChanged="SelectQuestion_Click">
+        <ListBox x:Name="QuestionListBox" Grid.Column="0" ItemsSource="{Binding QuestionsList}" SelectedItem="{Binding SelectedQuestion}"  Grid.Row="0" Margin="0,50,0,0"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel x:Name="QuestionPanel" Margin="0,0,0,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Width="200">Вопрос:</TextBlock>
-                        <TextBox x:Name="QuestionIdBox" Text="{Binding Path=Id}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Width="0" Visibility="Hidden"></TextBox>
-                        <TextBox x:Name="QuestionNameBox" Text="{Binding Path=Question}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,-17,0,0" Width="200"></TextBox>
-                        <Button x:Name="SaveQuestionButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="220,-40,0,0" Width="80" Height="40" Click="EditQuestion_Click">Сохранить</Button>
-                        <Button x:Name="RemoveQuestionButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,-40,0,0" Width="80" Height="40" Click="RemoveQuestion_Click">Удалить</Button>
+                        <TextBox x:Name="QuestionNameBox" Text="{Binding Path=Question}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Width="200"></TextBox>
+                        <Button x:Name="SaveQuestionButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="220,-30,0,0" Width="80" Height="40" Command="{Binding DataContext.EditQuestion, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">Сохранить</Button>
+                        <Button x:Name="RemoveQuestionButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,-40,0,0" Width="80" Height="40" Command="{Binding DataContext.DeleteQuestion, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">Удалить</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -36,18 +35,18 @@
         <TextBlock HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Margin="10,5,0,0" Width="200">Ответ:</TextBlock>
         <TextBox x:Name="AddAnswerBox" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0" Width="100"></TextBox>
         <TextBlock HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Margin="120,5,0,0" Width="200">Верный:</TextBlock>
-        <CheckBox x:Name="TrueAnswerCheckBox"  Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,27,0,0"></CheckBox>
-        <Button Width="100" Height="20" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="170,25,0,0" Click="AddAnswer_Click">Добавить
+        <CheckBox x:Name="TrueAnswerCheckBox" IsChecked="{Binding Correct}" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,27,0,0"></CheckBox>
+        <Button Width="100" Height="20" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="170,25,0,0"  Command="{Binding AddAnswer}"  CommandParameter="{Binding ElementName=AddAnswerBox,Path=Text}">Добавить
         </Button>
-        <ListBox x:Name="AnswerListBox" Grid.Column="1" Margin="10,50,5,0"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <ListBox x:Name="AnswerListBox" Grid.Column="1" Margin="10,50,5,0" ItemsSource="{Binding AnswersList}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel  Margin="0,0,0,0" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox x:Name="AnswerIdBox" Text="{Binding Path=Id}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Width="0" Visibility="Hidden"></TextBox>
                         <TextBox x:Name="AnswerNameBox" Text="{Binding Path=Answer}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,-17,0,0" Width="100"></TextBox>
                         <CheckBox x:Name="TrueAnswerCheckBox" IsChecked="{Binding Path=True}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,-17,0,0"></CheckBox>
-                        <Button x:Name="SaveAnswerButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,-20,0,0" Width="65" Height="20" Click="EditAnswer_Click">Сохранить</Button>
-                        <Button x:Name="RemoveAnswerButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,-20,0,0" Width="20" Height="20" Click="RemoveAnswer_Click">X</Button>
+                        <Button x:Name="SaveAnswerButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,-20,0,0" Width="65" Height="20" Command="{Binding DataContext.EditAnswer, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">Сохранить</Button>
+                        <Button x:Name="RemoveAnswerButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,-20,0,0" Width="20" Height="20"  Command="{Binding DataContext.DeleteAnswer, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Id}">X</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

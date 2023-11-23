@@ -24,13 +24,10 @@ namespace TestClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        ItemsSource iS = new ItemsSource();
-       
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new TestViewModel();
-            //iS.OnStart(TestListBox);
            
         }
         public void TakeTest_Click(object sender, RoutedEventArgs e)
@@ -46,8 +43,6 @@ namespace TestClient
             var Id = fcp.FindTextBoxChildrenText("TestIdBox", sender as System.Windows.Controls.Button);
             var Name = fcp.FindTextBoxChildrenText("TestNameBox", sender as System.Windows.Controls.Button);
             EditTestWindow contactsWindow = new EditTestWindow(Id);
-            GetListsProvider gl = new GetListsProvider();
-            gl.GetQuestions(Id);
             contactsWindow.Title = "Редактировать тест " + Name;
             contactsWindow.Show();
             contactsWindow.Owner = this;
